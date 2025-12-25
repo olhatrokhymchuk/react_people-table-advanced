@@ -44,16 +44,28 @@ export function PeopleTable({
       <thead>
         <tr>
           <th onClick={() => setSort('name')} data-cy="sortByName">
-            Name {renderSortSymbol('name')}
+            <span className="title">Name</span>
+            <span className="sort" aria-hidden="true">
+              {renderSortSymbol('name')}
+            </span>
           </th>
           <th onClick={() => setSort('sex')} data-cy="sortBySex">
-            Sex {renderSortSymbol('sex')}
+            <span className="title">Sex</span>
+            <span className="sort" aria-hidden="true">
+              {renderSortSymbol('sex')}
+            </span>
           </th>
           <th onClick={() => setSort('born')} data-cy="sortByBorn">
-            Born {renderSortSymbol('born')}
+            <span className="title">Born</span>
+            <span className="sort" aria-hidden="true">
+              {renderSortSymbol('born')}
+            </span>
           </th>
           <th onClick={() => setSort('died')} data-cy="sortByDied">
-            Died {renderSortSymbol('died')}
+            <span className="title">Died</span>
+            <span className="sort" aria-hidden="true">
+              {renderSortSymbol('died')}
+            </span>
           </th>
           <th>Mother</th>
           <th>Father</th>
