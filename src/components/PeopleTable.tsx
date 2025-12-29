@@ -33,7 +33,7 @@ export function PeopleTable({
       return 'unsorted';
     }
 
-    return order === 'asc' ? 'asc' : 'desc';
+    return order === 'desc' ? 'desc' : 'asc';
   };
 
   return (

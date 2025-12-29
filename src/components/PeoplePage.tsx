@@ -1,8 +1,9 @@
-import { useSearchParams, useParams } from 'react-router-dom';
+import { useSearchParams, useParams, useLocation } from 'react-router-dom';
 import { PeopleFilters } from './PeopleFilters';
 import { Loader } from './Loader';
 import { PeopleTable } from './PeopleTable';
 import { Person } from '../types/Person';
+import { useNavigate } from 'react-router-dom';
 
 interface PeoplePageProps {
   people: Person[];
@@ -21,7 +22,12 @@ export const PeoplePage = ({
   const sort = params.get('sort');
   const order = params.get('order');
   const sex = params.get('sex');
-  const { slug } = useParams();
+  const { slug: selectedSlug } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const handleSelect = (targetSlug: string) => {
+    navigate(`/people/${targetSlug}${location.search}`);
+  };
 
   const filtered = people
     .filter(person => {
@@ -119,8 +125,8 @@ export const PeoplePage = ({
 
     if (currentSort !== field) {
       newParams.set('sort', field);
-      newParams.delete('order');
-    } else if (!currentOrder) {
+      newParams.set('order', 'asc');
+    } else if (currentOrder !== 'desc') {
       newParams.set('order', 'desc');
     } else {
       newParams.delete('sort');
@@ -161,6 +167,7 @@ export const PeoplePage = ({
                 setQuery={setQuery}
                 centuries={centuries}
                 toggleCentury={toggleCentury}
+                sex={sex}
                 setSex={setSex}
                 resetFilters={resetFilters}
               />
@@ -198,7 +205,8 @@ export const PeoplePage = ({
                     sort={sort ?? ''}
                     order={order ?? ''}
                     setSort={setSort}
-                    selectedSlug={slug}
+                    selectedSlug={selectedSlug}
+                    onSelect={handleSelect}
                   />
                 ) : (
                   <p data-cy="noFilteredPeople">

@@ -43,7 +43,7 @@ const page = {
 
   assertHash: hash => cy.location('hash').should('eq', hash),
   assertSearch: search => cy.location('search').should('eq', search),
-  assetTitle: text =>
+  assertTitle: text =>
     page.title().should('have.length', 1).and('have.text', text),
 };
 
@@ -95,7 +95,7 @@ describe('', () => {
     it('should have only correct title', () => {
       page.mockPeople();
       page.visit('/');
-      page.assetTitle('Home Page');
+      page.assertTitle('Home Page');
     });
 
     it('should not send API request', () => {
@@ -134,7 +134,7 @@ describe('', () => {
     it('should redirect from /home to /', () => {
       page.visit('/#/home');
       page.assertHash('#/');
-      page.assetTitle('Home Page');
+      page.assertTitle('Home Page');
     });
   });
 
@@ -168,7 +168,7 @@ describe('', () => {
     it('should have only correct title', () => {
       page.mockPeople();
       page.visit('/#/some/not/existing/page');
-      page.assetTitle('Page not found');
+      page.assertTitle('Page not found');
     });
 
     it('should not send API request', () => {
@@ -237,7 +237,7 @@ describe('', () => {
     it('should have only correct title', () => {
       page.mockPeople();
       page.visit('/#/people');
-      page.assetTitle('People Page');
+      page.assertTitle('People Page');
     });
 
     it('should send one API request', () => {
@@ -524,7 +524,7 @@ describe('', () => {
     });
 
     it('should have only correct title', () => {
-      page.assetTitle('People Page');
+      page.assertTitle('People Page');
     });
 
     it('should have people table', () => {
@@ -577,7 +577,7 @@ describe('', () => {
     });
 
     it('should have only correct title', () => {
-      page.assetTitle('People Page');
+      page.assertTitle('People Page');
     });
 
     it('should have people table', () => {

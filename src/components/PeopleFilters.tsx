@@ -5,6 +5,7 @@ interface PeopleFiltersProps {
   toggleCentury: (v: string) => void;
   setSex: (v: string | null) => void;
   resetFilters: () => void;
+  sex: string | null;
 }
 
 export const PeopleFilters = ({
@@ -14,17 +15,31 @@ export const PeopleFilters = ({
   toggleCentury,
   setSex,
   resetFilters,
+  sex,
 }: PeopleFiltersProps) => {
   return (
     <nav className="panel">
       <p className="panel-heading">Filters</p>
 
       <p className="panel-tabs" data-cy="SexFilter">
-        <button className="is-active" onClick={() => setSex(null)}>
+        <button
+          className={sex === null ? 'is-active' : ''}
+          onClick={() => setSex(null)}
+        >
           All
         </button>
-        <button onClick={() => setSex('m')}>Male</button>
-        <button onClick={() => setSex('f')}>Female</button>
+        <button
+          className={sex === 'm' ? 'is-active' : ''}
+          onClick={() => setSex('m')}
+        >
+          Male
+        </button>
+        <button
+          className={sex === 'f' ? 'is-active' : ''}
+          onClick={() => setSex('f')}
+        >
+          Female
+        </button>
       </p>
 
       <div className="panel-block">
