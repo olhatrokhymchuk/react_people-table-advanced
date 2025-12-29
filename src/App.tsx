@@ -35,6 +35,12 @@ export const App = () => {
                 <PeoplePage people={people} loading={loading} error={error} />
               }
             />
+            <Route
+              path="/people/:slug"
+              element={
+                <PeoplePage people={people} loading={loading} error={error} />
+              }
+            />
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route
               path="*"

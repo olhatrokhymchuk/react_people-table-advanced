@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useParams } from 'react-router-dom';
 import { PeopleFilters } from './PeopleFilters';
 import { Loader } from './Loader';
 import { PeopleTable } from './PeopleTable';
@@ -21,6 +21,7 @@ export const PeoplePage = ({
   const sort = params.get('sort');
   const order = params.get('order');
   const sex = params.get('sex');
+  const { slug } = useParams();
 
   const filtered = people
     .filter(person => {
@@ -197,7 +198,7 @@ export const PeoplePage = ({
                     sort={sort ?? ''}
                     order={order ?? ''}
                     setSort={setSort}
-                    selectedSlug={params.get('slug') ?? undefined}
+                    selectedSlug={slug}
                   />
                 ) : (
                   <p data-cy="noFilteredPeople">

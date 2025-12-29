@@ -90,6 +90,7 @@ export function PeopleTable({
           ) : mother ? (
             <PersonLink
               person={mother}
+              data-cy="motherLink"
               onClick={e => {
                 e.stopPropagation();
                 onSelect?.(mother.slug);
