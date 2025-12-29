@@ -28,12 +28,12 @@ export function PeopleTable({
     return <p>Loading...</p>;
   }
 
-  const renderSortSymbol = (field: string) => {
-    if (sort === field) {
-      return order === 'desc' ? '↓' : '↑';
+  const getSortClass = (field: string) => {
+    if (sort !== field) {
+      return 'unsorted';
     }
 
-    return '↕';
+    return order === 'asc' ? 'asc' : 'desc';
   };
 
   return (
@@ -43,29 +43,33 @@ export function PeopleTable({
     >
       <thead>
         <tr>
-          <th onClick={() => setSort('name')} data-cy="sortByName">
-            <span className="title">Name</span>
-            <span className="sort" aria-hidden="true">
-              {renderSortSymbol('name')}
-            </span>
+          <th
+            onClick={() => setSort('name')}
+            data-cy="sortByName"
+            className={getSortClass('name')}
+          >
+            Name
           </th>
-          <th onClick={() => setSort('sex')} data-cy="sortBySex">
-            <span className="title">Sex</span>
-            <span className="sort" aria-hidden="true">
-              {renderSortSymbol('sex')}
-            </span>
+          <th
+            onClick={() => setSort('sex')}
+            data-cy="sortBySex"
+            className={getSortClass('sex')}
+          >
+            Sex
           </th>
-          <th onClick={() => setSort('born')} data-cy="sortByBorn">
-            <span className="title">Born</span>
-            <span className="sort" aria-hidden="true">
-              {renderSortSymbol('born')}
-            </span>
+          <th
+            onClick={() => setSort('born')}
+            data-cy="sortByBorn"
+            className={getSortClass('born')}
+          >
+            Born
           </th>
-          <th onClick={() => setSort('died')} data-cy="sortByDied">
-            <span className="title">Died</span>
-            <span className="sort" aria-hidden="true">
-              {renderSortSymbol('died')}
-            </span>
+          <th
+            onClick={() => setSort('died')}
+            data-cy="sortByDied"
+            className={getSortClass('died')}
+          >
+            Died
           </th>
           <th>Mother</th>
           <th>Father</th>
@@ -121,7 +125,7 @@ export function PeopleTable({
               <td>
                 <PersonLink person={person} />
               </td>
-              <td>{person.sex === 'female' ? 'f' : 'm'}</td>
+              <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
               <td>{motherCell}</td>

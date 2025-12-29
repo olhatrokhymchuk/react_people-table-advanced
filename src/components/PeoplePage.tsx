@@ -58,7 +58,7 @@ export const PeoplePage = ({
         return true;
       }
 
-      return person.sex?.startsWith(sex);
+      return person.sex === sex;
     });
 
   const result = sort
@@ -189,14 +189,21 @@ export const PeoplePage = ({
                   </p>
                 )}
 
-              {!loading && !error && result.length > 0 && (
-                <PeopleTable
-                  people={result}
-                  sort={sort ?? ''}
-                  order={order ?? ''}
-                  setSort={setSort}
-                />
-              )}
+              {!loading &&
+                !error &&
+                (result.length > 0 ? (
+                  <PeopleTable
+                    people={result}
+                    sort={sort ?? ''}
+                    order={order ?? ''}
+                    setSort={setSort}
+                    selectedSlug={params.get('slug') ?? undefined}
+                  />
+                ) : (
+                  <p data-cy="noFilteredPeople">
+                    There are no people matching the current search criteria
+                  </p>
+                ))}
             </div>
           </div>
         </div>

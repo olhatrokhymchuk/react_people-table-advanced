@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { Person } from '../types/Person';
 
 interface PersonLinkProps {
@@ -9,13 +8,11 @@ interface PersonLinkProps {
 export function PersonLink({ person, onClick }: PersonLinkProps) {
   const { slug, name, sex } = person;
 
+  const sexClass = sex === 'f' ? 'has-text-danger' : 'has-text-link';
+
   return (
-    <Link
-      to={`/people/${slug}`}
-      className={sex === 'female' ? 'has-text-danger' : ''}
-      onClick={onClick}
-    >
+    <a href={`#/people/${slug}`} className={sexClass} onClick={onClick}>
       {name}
-    </Link>
+    </a>
   );
 }

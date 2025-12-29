@@ -1,9 +1,9 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { PeoplePage } from './components/PeoplePage';
 import { Navbar } from './components/Navbar';
 import { Person } from './types/Person';
-import { Navigate } from 'react-router-dom';
+import { getPeople } from './api';
 
 import './App.scss';
 
@@ -13,16 +13,12 @@ export const App = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('api/people.json')
-      .then(res => res.json())
-      .then((data: Person[]) => {
+    getPeople()
+      .then(data => {
         setPeople(data);
-        setLoading(false);
       })
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
-      });
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
